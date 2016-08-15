@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		185690551D615481004D1027 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 185690541D615481004D1027 /* main.m */; };
+		185690581D615481004D1027 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185690571D615481004D1027 /* AppDelegate.m */; };
+		1856905B1D615481004D1027 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856905A1D615481004D1027 /* ViewController.m */; };
+		1856905E1D615481004D1027 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1856905C1D615481004D1027 /* Main.storyboard */; };
+		185690601D615481004D1027 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1856905F1D615481004D1027 /* Assets.xcassets */; };
+		185690631D615481004D1027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185690611D615481004D1027 /* LaunchScreen.storyboard */; };
+		1856906D1D61549C004D1027 /* KIActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856906C1D61549C004D1027 /* KIActionSheet.m */; };
+		185690701D615B04004D1027 /* UITableView+KIActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856906F1D615B04004D1027 /* UITableView+KIActionSheet.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		185690501D615481004D1027 /* KIActionSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIActionSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		185690541D615481004D1027 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		185690561D615481004D1027 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		185690571D615481004D1027 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		185690591D615481004D1027 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1856905A1D615481004D1027 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1856905D1D615481004D1027 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1856905F1D615481004D1027 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		185690621D615481004D1027 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		185690641D615481004D1027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1856906B1D61549C004D1027 /* KIActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIActionSheet.h; sourceTree = "<group>"; };
+		1856906C1D61549C004D1027 /* KIActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIActionSheet.m; sourceTree = "<group>"; };
+		1856906E1D615B04004D1027 /* UITableView+KIActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+KIActionSheet.h"; sourceTree = "<group>"; };
+		1856906F1D615B04004D1027 /* UITableView+KIActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+KIActionSheet.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1856904D1D615481004D1027 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		185690471D615480004D1027 = {
+			isa = PBXGroup;
+			children = (
+				185690521D615481004D1027 /* KIActionSheet */,
+				185690511D615481004D1027 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		185690511D615481004D1027 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				185690501D615481004D1027 /* KIActionSheet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		185690521D615481004D1027 /* KIActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				1856906A1D61548F004D1027 /* KIActionSheet */,
+				185690561D615481004D1027 /* AppDelegate.h */,
+				185690571D615481004D1027 /* AppDelegate.m */,
+				185690591D615481004D1027 /* ViewController.h */,
+				1856905A1D615481004D1027 /* ViewController.m */,
+				1856905C1D615481004D1027 /* Main.storyboard */,
+				1856905F1D615481004D1027 /* Assets.xcassets */,
+				185690611D615481004D1027 /* LaunchScreen.storyboard */,
+				185690641D615481004D1027 /* Info.plist */,
+				185690531D615481004D1027 /* Supporting Files */,
+			);
+			path = KIActionSheet;
+			sourceTree = "<group>";
+		};
+		185690531D615481004D1027 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				185690541D615481004D1027 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1856906A1D61548F004D1027 /* KIActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				1856906B1D61549C004D1027 /* KIActionSheet.h */,
+				1856906C1D61549C004D1027 /* KIActionSheet.m */,
+				1856906E1D615B04004D1027 /* UITableView+KIActionSheet.h */,
+				1856906F1D615B04004D1027 /* UITableView+KIActionSheet.m */,
+			);
+			path = KIActionSheet;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1856904F1D615481004D1027 /* KIActionSheet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 185690671D615481004D1027 /* Build configuration list for PBXNativeTarget "KIActionSheet" */;
+			buildPhases = (
+				1856904C1D615481004D1027 /* Sources */,
+				1856904D1D615481004D1027 /* Frameworks */,
+				1856904E1D615481004D1027 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KIActionSheet;
+			productName = KIActionSheet;
+			productReference = 185690501D615481004D1027 /* KIActionSheet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		185690481D615480004D1027 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = SmartWalle;
+				TargetAttributes = {
+					1856904F1D615481004D1027 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 1856904B1D615480004D1027 /* Build configuration list for PBXProject "KIActionSheet" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 185690471D615480004D1027;
+			productRefGroup = 185690511D615481004D1027 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1856904F1D615481004D1027 /* KIActionSheet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1856904E1D615481004D1027 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				185690631D615481004D1027 /* LaunchScreen.storyboard in Resources */,
+				185690601D615481004D1027 /* Assets.xcassets in Resources */,
+				1856905E1D615481004D1027 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1856904C1D615481004D1027 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1856905B1D615481004D1027 /* ViewController.m in Sources */,
+				185690701D615B04004D1027 /* UITableView+KIActionSheet.m in Sources */,
+				1856906D1D61549C004D1027 /* KIActionSheet.m in Sources */,
+				185690581D615481004D1027 /* AppDelegate.m in Sources */,
+				185690551D615481004D1027 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1856905C1D615481004D1027 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1856905D1D615481004D1027 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		185690611D615481004D1027 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				185690621D615481004D1027 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		185690651D615481004D1027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		185690661D615481004D1027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		185690681D615481004D1027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KIActionSheet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartwalle.KIActionSheet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		185690691D615481004D1027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KIActionSheet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartwalle.KIActionSheet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1856904B1D615480004D1027 /* Build configuration list for PBXProject "KIActionSheet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				185690651D615481004D1027 /* Debug */,
+				185690661D615481004D1027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		185690671D615481004D1027 /* Build configuration list for PBXNativeTarget "KIActionSheet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				185690681D615481004D1027 /* Debug */,
+				185690691D615481004D1027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 185690481D615480004D1027 /* Project object */;
+}
