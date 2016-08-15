@@ -215,10 +215,15 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+        [cell setBackgroundColor:[UIColor clearColor]];
         
         UIView *selectedView = [[UIView alloc] init];
-        [selectedView setBackgroundColor:[UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00]];
+        [selectedView setBackgroundColor:[UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0]];
         [cell setSelectedBackgroundView:selectedView];
+        
+        UIView *view = [[UIView alloc] init];
+        [view setBackgroundColor:[UIColor whiteColor]];
+        [cell setBackgroundView:view];
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
@@ -398,7 +403,7 @@
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setSeparatorInset:UIEdgeInsetsZero];
-        [_tableView setBackgroundColor:[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1.00]];
+        [_tableView setBackgroundColor:[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:0.4f]];
         [_tableView setBounces:NO];
         [_tableView setShowsVerticalScrollIndicator:NO];
         [_tableView setShowsHorizontalScrollIndicator:NO];
