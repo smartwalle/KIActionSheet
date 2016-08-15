@@ -29,7 +29,6 @@ typedef void(^KIActionSheetDidDismissWithButtonIndexBlock)  (KIActionSheet *acti
             otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (void)show;
-//- (void)showInView:(UIView *)view;
 
 - (void)dismiss;
 

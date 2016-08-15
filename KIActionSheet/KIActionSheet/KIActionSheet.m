@@ -9,9 +9,15 @@
 #import "KIActionSheet.h"
 #import "UITableView+KIActionSheet.h"
 
+#define kActionSheetTitleKey       @"kActionSheetTitleKey"
 #define kActionSheetTitleListKey   @"kActionSheetTitleListKey"
 #define kActionSheetDestructiveKey @"kActionSheetDestructiveKey"
 #define kActionSheetCancelKey      @"kActionSheetCancelKey"
+
+#define kTitleSection       0
+#define kTitleListSection   1
+#define kDestructiveSection 2
+#define kCancelSection      3
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface UIApplication (KIActionSheet)
@@ -129,12 +135,16 @@
             va_end(list);
         }
         
+        [self.dataSource setObject:@[] forKey:kActionSheetTitleKey];
         [self.dataSource setObject:@[] forKey:kActionSheetTitleListKey];
         [self.dataSource setObject:@[] forKey:kActionSheetDestructiveKey];
         [self.dataSource setObject:@[] forKey:kActionSheetCancelKey];
         
         if (titleList != nil) {
             [self.dataSource setObject:titleList forKey:kActionSheetTitleListKey];
+        }
+        if (title != nil && ![[title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+            [self.dataSource setObject:@[title] forKey:kActionSheetTitleKey];
         }
         if (cancelButtonTitle != nil && ![[cancelButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
             [self.dataSource setObject:@[cancelButtonTitle] forKey:kActionSheetCancelKey];
@@ -163,46 +173,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == kTitleSection) {
+        return [[self.dataSource objectForKey:kActionSheetTitleKey] count];
+    } else if (section == kTitleListSection) {
         return [[self.dataSource objectForKey:kActionSheetTitleListKey] count];
-    } else if (section == 1) {
+    } else if (section == kDestructiveSection) {
         return [[self.dataSource objectForKey:kActionSheetDestructiveKey] count];
-    } else if (section == 2) {
+    } else if (section == kCancelSection) {
         return [[self.dataSource objectForKey:kActionSheetCancelKey] count];
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0 && self.title != nil && ![[self.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
-        return 30.0f;
-    }
-    
     if (self.dataSource.count > 1 && section == self.dataSource.count-1 && [[self.dataSource objectForKey:kActionSheetCancelKey] count] > 0) {
         if ([[self.dataSource objectForKey:kActionSheetDestructiveKey] count] > 0 || [[self.dataSource objectForKey:kActionSheetTitleListKey] count] > 0) {
             return 8.0f;
         }
     }
     return 0;
-}
-    
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        UILabel *titleLabel = [[UILabel alloc] init];
-        [titleLabel setText:self.title];
-        [titleLabel setFont:[UIFont systemFontOfSize:12.0f]];
-        [titleLabel setTextColor:[UIColor colorWithRed:0.18 green:0.18 blue:0.18 alpha:1.00]];
-        [titleLabel setBackgroundColor:[UIColor whiteColor]];
-        [titleLabel setTextAlignment:NSTextAlignmentCenter];
-        
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 29.5, CGRectGetWidth(self.frame), 0.5)];
-        [line setBackgroundColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.00]];
-        [titleLabel addSubview:line];
-        
-        return titleLabel;
-    }
-    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,23 +205,30 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:17.0f]];
+        
     }
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+    [cell.textLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [cell.textLabel setTextColor:[UIColor colorWithRed:0.18 green:0.18 blue:0.18 alpha:1.00]];
     
     NSString *title;
-    if (indexPath.section == 0) {
+    if (indexPath.section == kTitleSection) {
+        title = [[self.dataSource objectForKey:kActionSheetTitleKey] firstObject];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:10.0f]];
+        [cell.textLabel setTextColor:[UIColor colorWithRed:0.56 green:0.56 blue:0.56 alpha:1.00]];
+        [cell.textLabel setNumberOfLines:2];
+    } else if (indexPath.section == kTitleListSection) {
         NSArray *list = [self.dataSource objectForKey:kActionSheetTitleListKey];
         title = [list objectAtIndex:indexPath.row];
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kDestructiveSection) {
         title = [[self.dataSource objectForKey:kActionSheetDestructiveKey] firstObject];
         [cell.textLabel setTextColor:[UIColor colorWithRed:0.92 green:0.25 blue:0.27 alpha:1.00]];
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == kCancelSection) {
         title = [[self.dataSource objectForKey:kActionSheetCancelKey] firstObject];
     }
     [cell.textLabel setText:title];
-    
     
     return cell;
 }
@@ -244,21 +240,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == kTitleSection) {
+        return ;
+    }
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger index = indexPath.row;
     
-    if (indexPath.section > 0) {
-        // section 为 1 或者 2 的时候;
-        index += [self tableView:tableView numberOfRowsInSection:0];
+    if (indexPath.section > kTitleListSection) {
+        index += [self tableView:tableView numberOfRowsInSection:kTitleListSection];
     }
     
-    if (indexPath.section > 1) {
-        // section 为 2 的时候;
-        index += [self tableView:tableView numberOfRowsInSection:1];
+    if (indexPath.section > kDestructiveSection) {
+        index += [self tableView:tableView numberOfRowsInSection:kDestructiveSection];
     }
     
-    if (indexPath.section == 2 && self.actionSheetCancelBlock != nil) {
+    if (indexPath.section == kCancelSection && self.actionSheetCancelBlock != nil) {
         self.actionSheetCancelBlock(self);
     } else {
         if (self.actionSheetClickedButtonAtIndexBlock != nil) {
@@ -286,7 +283,7 @@
 }
 
 - (void)showBackgroundColor {
-    [self updateBackgroundColorWithAlpha:0.4f];
+    [self updateBackgroundColorWithAlpha:0.5f];
 }
 
 - (void)hideBackgroundColor {
