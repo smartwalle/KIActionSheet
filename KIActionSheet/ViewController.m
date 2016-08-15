@@ -27,7 +27,7 @@
 
 - (IBAction)showActionSheet:(id)sender {
     
-    KIActionSheet *as = [[KIActionSheet alloc] initWithTitle:@"这里会是一个很长很长的标题，但是最多也只能显示两行哦。。。。" cancelButtonTitle:@"取消" destructiveButtonTitle:@"不要点我哦" otherButtonTitles:@"标题一", @"标题二", @"A", @"B", @"C", nil];
+    KIActionSheet *as = [[KIActionSheet alloc] initWithTitle:@"这里会是一个很长很长的标题，但是最多也只能显示三行哦。。。。真的只能够显示三行，不信你试试看吧。我就说了吧，只显示三行，不会有多的。" cancelButtonTitle:@"取消" destructiveButtonTitle:@"不要点我哦" otherButtonTitles:@"标题一", @"标题二", @"A", @"B", @"C", nil];
     
     NSLog(@"%d - %d", as.cancelButtonIndex, as.destructiveButtonIndex);
     
@@ -45,9 +45,15 @@
     
     [as setDidDismissWithButtonIndexBlock:^(KIActionSheet *actionSheet, NSInteger buttonIndex) {
         NSLog(@"setDidDismissWithButtonIndexBlock  %d", buttonIndex);
+        
+        
     }];
     
     [as setWillDismissWithButtonIndexBlock:^(KIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex) {
+            KIActionSheet *as2 = [[KIActionSheet alloc] initWithTitle:@"" cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"YES", @"NO", nil];
+            [as2 show];
+        }
         NSLog(@"setWillDismissWithButtonIndexBlock %d", buttonIndex);
     }];
     

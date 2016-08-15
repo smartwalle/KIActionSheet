@@ -36,7 +36,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface KI_ActionSheetController : UIViewController
-@property (nonatomic, weak) KIActionSheet *actionSheet;
 @end
 
 @implementation KI_ActionSheetController
@@ -75,13 +74,21 @@
 }
     
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self.actionSheet setFrame:self.view.frame];
+    [self updateSubviewsFrame:self.view.frame];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     CGRect newFrame = self.view.bounds;
     newFrame.size = size;
-    [self.actionSheet setFrame:newFrame];
+    [self updateSubviewsFrame:newFrame];
+}
+    
+- (void)updateSubviewsFrame:(CGRect)frame {
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[KIActionSheet class]]) {
+            [view setFrame:frame];
+        }
+    }
 }
 
 @end
@@ -195,6 +202,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kTitleSection) {
+        return 60.0f;
+    }
     return 50;
 }
 
@@ -207,7 +217,7 @@
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         
         UIView *selectedView = [[UIView alloc] init];
-        [selectedView setBackgroundColor:[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1.00]];
+        [selectedView setBackgroundColor:[UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00]];
         [cell setSelectedBackgroundView:selectedView];
     }
     
@@ -219,9 +229,9 @@
     if (indexPath.section == kTitleSection) {
         title = [[self.dataSource objectForKey:kActionSheetTitleKey] firstObject];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:10.0f]];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:12.0f]];
         [cell.textLabel setTextColor:[UIColor colorWithRed:0.56 green:0.56 blue:0.56 alpha:1.00]];
-        [cell.textLabel setNumberOfLines:2];
+        [cell.textLabel setNumberOfLines:3];
     } else if (indexPath.section == kTitleListSection) {
         NSArray *list = [self.dataSource objectForKey:kActionSheetTitleListKey];
         title = [list objectAtIndex:indexPath.row];
@@ -307,8 +317,6 @@
     [self.window setFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     [self.window setHidden:NO];
-    KI_ActionSheetController *controller = (KI_ActionSheetController *)self.window.rootViewController;
-    [controller setActionSheet:self];
     [self showInView:self.window.rootViewController.view];
 }
 
@@ -363,12 +371,16 @@
                          [self hideTableView];
                      } completion:^(BOOL finished) {
                          [self removeFromSuperview];
-                         [self.window removeFromSuperview];
-                         [self.window resignKeyWindow];
-                         [self.window setHidden:YES];
-                         KI_ActionSheetController *controller = (KI_ActionSheetController *)self.window.rootViewController;
-                         [controller setActionSheet:nil];
                          
+                         KI_ActionSheetController *controller = (KI_ActionSheetController *)self.window.rootViewController;
+                         
+                         NSArray *subViews = [controller.view subviews];
+                         
+                         if (subViews.count == 0) {
+                             [self.window removeFromSuperview];
+                             [self.window resignKeyWindow];
+                             [self.window setHidden:YES];
+                         }
                          block();
                      }];
 }
