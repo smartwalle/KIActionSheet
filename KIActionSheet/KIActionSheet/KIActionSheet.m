@@ -206,6 +206,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         
+        UIView *selectedView = [[UIView alloc] init];
+        [selectedView setBackgroundColor:[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1.00]];
+        [cell setSelectedBackgroundView:selectedView];
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
@@ -268,7 +271,7 @@
     }
     
     __weak KIActionSheet *weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(150 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(200 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
         [self dissmissWithBlock:^{
             if (weakSelf.actionSheetDidDismissWithButtonIndexBlock != nil) {
                 weakSelf.actionSheetDidDismissWithButtonIndexBlock(weakSelf, index);
