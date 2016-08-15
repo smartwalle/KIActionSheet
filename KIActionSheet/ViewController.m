@@ -27,7 +27,7 @@
 
 - (IBAction)showActionSheet:(id)sender {
     
-    KIActionSheet *as = [[KIActionSheet alloc] initWithTitle:@"" cancelButtonTitle:@"取消" destructiveButtonTitle:@"不要点我哦" otherButtonTitles:@"标题一", @"标题二", @"A", @"B", @"C", nil];
+    KIActionSheet *as = [[KIActionSheet alloc] initWithTitle:@"This is title" cancelButtonTitle:@"取消" destructiveButtonTitle:@"不要点我哦" otherButtonTitles:@"标题一", @"标题二", @"A", @"B", @"C", nil];
     
     NSLog(@"%d - %d", as.cancelButtonIndex, as.destructiveButtonIndex);
     
