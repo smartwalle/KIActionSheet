@@ -97,8 +97,6 @@
 @interface KIActionSheet () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableDictionary *dataSource;
-
-@property (nonatomic, copy) NSString *title;
     
 @property(nonatomic) NSInteger cancelButtonIndex;
 @property(nonatomic) NSInteger destructiveButtonIndex;
@@ -123,10 +121,9 @@
        destructiveButtonTitle:(NSString *)destructiveButtonTitle
             otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION {
     if (self = [super init]) {
-        NSMutableArray *titleList = nil;
+        NSMutableArray *otherList = [[NSMutableArray alloc] init];
         if (otherButtonTitles) {
-            titleList = [[NSMutableArray alloc] init];
-            [titleList addObject:otherButtonTitles];
+            [otherList addObject:otherButtonTitles];
             
             va_list list;
             va_start(list, otherButtonTitles);
@@ -137,30 +134,29 @@
                 if (title == nil) {
                     break;
                 }
-                [titleList addObject:title];
+                [otherList addObject:title];
             }
             va_end(list);
         }
         
-        [self.dataSource setObject:@[] forKey:kActionSheetTitleKey];
-        [self.dataSource setObject:@[] forKey:kActionSheetTitleListKey];
-        [self.dataSource setObject:@[] forKey:kActionSheetDestructiveKey];
-        [self.dataSource setObject:@[] forKey:kActionSheetCancelKey];
-        
-        if (titleList != nil) {
-            [self.dataSource setObject:titleList forKey:kActionSheetTitleListKey];
-        }
+        NSMutableArray *titleList = [[NSMutableArray alloc] init];
+        NSMutableArray *desList = [[NSMutableArray alloc] init];
+        NSMutableArray *cancelList = [[NSMutableArray alloc] init];
+
         if (title != nil && ![[title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
-            [self.dataSource setObject:@[title] forKey:kActionSheetTitleKey];
+            [titleList addObject:title];
         }
         if (cancelButtonTitle != nil && ![[cancelButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
-            [self.dataSource setObject:@[cancelButtonTitle] forKey:kActionSheetCancelKey];
+            [cancelList addObject:cancelButtonTitle];
         }
         if (destructiveButtonTitle != nil && ![[destructiveButtonTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
-            [self.dataSource setObject:@[destructiveButtonTitle] forKey:kActionSheetDestructiveKey];
+            [desList addObject:destructiveButtonTitle];
         }
         
-        [self setTitle:title];
+        [self.dataSource setObject:titleList forKey:kActionSheetTitleKey];
+        [self.dataSource setObject:otherList forKey:kActionSheetTitleListKey];
+        [self.dataSource setObject:desList forKey:kActionSheetDestructiveKey];
+        [self.dataSource setObject:cancelList forKey:kActionSheetCancelKey];
         
         [self ki__initFinished];
     }
@@ -202,7 +198,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kTitleSection) {
+    if (indexPath.section == kTitleSection || [[self.dataSource objectForKey:kActionSheetTitleKey] count] > 0) {
         return 60.0f;
     }
     return 50;
@@ -315,6 +311,68 @@
         CGFloat height = self.tableView.height;
         CGRect tFrame = CGRectMake(0, CGRectGetHeight(self.frame)-height, CGRectGetWidth(self.frame), height);
         [self.tableView setFrame:tFrame];
+    }
+}
+    
+- (NSInteger)addButtonWithTitle:(NSString *)title {
+    if (title == nil || [title isEqualToString:@""]) {
+        return -1;
+    }
+    NSMutableArray *titleList = [self.dataSource objectForKey:kActionSheetTitleListKey];
+    for (NSString *t in titleList) {
+        if ([t isEqualToString:title]) {
+            return -1;
+        }
+    }
+    
+    [titleList addObject:title];
+    return titleList.count-1;
+}
+    
+- (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex {
+    NSMutableArray *titleList = [self.dataSource objectForKey:kActionSheetTitleListKey];
+    NSArray *desList = [self.dataSource objectForKey:kActionSheetDestructiveKey];
+    NSArray *cancelList = [self.dataSource objectForKey:kActionSheetCancelKey];
+    
+    NSString *title = nil;
+    
+    if (buttonIndex < titleList.count) {
+        title = [titleList objectAtIndex:buttonIndex];
+        return title;
+    }
+    
+    NSInteger dx = buttonIndex - (titleList.count - 1);
+    if (dx == 1) {
+        if (desList.count > 0) {
+            title = [desList firstObject];
+        } else if (cancelList.count > 0) {
+            title = [cancelList firstObject];
+        }
+        return title;
+    }
+    
+    if (dx == 2) {
+        if (desList.count > 0 && cancelList.count > 0) {
+            title = [cancelList firstObject];
+            return title;
+        }
+    }
+    return title;
+}
+    
+- (void)setCancelButtonTitle:(NSString *)title {
+    if (title == nil) {
+        [self.dataSource setObject:[@[] mutableCopy] forKey:kActionSheetCancelKey];
+    } else {
+        [self.dataSource setObject:[@[[title copy]] mutableCopy] forKey:kActionSheetCancelKey];
+    }
+}
+    
+- (void)setDestructiveButtonTitle:(NSString *)title {
+    if (title == nil) {
+        [self.dataSource setObject:[@[] mutableCopy] forKey:kActionSheetDestructiveKey];
+    } else {
+        [self.dataSource setObject:[@[[title copy]] mutableCopy] forKey:kActionSheetDestructiveKey];
     }
 }
 
@@ -436,6 +494,14 @@
     });
     [window setBackgroundColor:[UIColor clearColor]];
     return window;
+}
+    
+- (NSString *)title {
+    return [[self.dataSource objectForKey:kActionSheetTitleKey] firstObject];
+}
+
+- (void)setTitle:(NSString *)title {
+    [self.dataSource setObject:@[[title copy]] forKey:kActionSheetTitleKey];
 }
 
 - (void)setClickedButtonAtIndexBlock:(KIActionSheetClickedButtonAtIndexBlock)block {
