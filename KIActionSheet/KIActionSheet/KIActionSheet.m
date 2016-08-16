@@ -230,9 +230,9 @@
     if (indexPath.section == kTitleSection) {
         title = [[self.dataSource objectForKey:kActionSheetTitleKey] firstObject];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:12.0f]];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
         [cell.textLabel setTextColor:[UIColor colorWithRed:0.56 green:0.56 blue:0.56 alpha:1.00]];
-        [cell.textLabel setNumberOfLines:3];
+        [cell.textLabel setNumberOfLines:2];
     } else if (indexPath.section == kTitleListSection) {
         NSArray *list = [self.dataSource objectForKey:kActionSheetTitleListKey];
         title = [list objectAtIndex:indexPath.row];
