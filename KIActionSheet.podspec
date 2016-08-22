@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "KIActionSheet"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "KIActionSheet"
 
   s.description  = <<-DESC
