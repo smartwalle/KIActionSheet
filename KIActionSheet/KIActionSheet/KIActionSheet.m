@@ -467,7 +467,7 @@
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setSeparatorInset:UIEdgeInsetsZero];
-        [_tableView setBackgroundColor:[UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:0.0f]];
+        [_tableView setBackgroundColor:[UIColor clearColor]];
         [_tableView setBounces:NO];
         [_tableView setShowsVerticalScrollIndicator:NO];
         [_tableView setShowsHorizontalScrollIndicator:NO];
